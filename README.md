@@ -2,7 +2,7 @@
 
 This project uses dataset from **Brazilian E-Commerce Public Dataset by Olist** [(sources: Kaggle / Olist Store)](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce/data?select=olist_orders_dataset.csv). The dataset has information of 100k online e-commerce orders from 2016 to 2018 made at multiple marketplaces in Brazil. 
 
-## Freight Performance Analysis
+## Freight-Shipping Performance Analysis
 Tools: `SQL`, `Tableau`
 
 **Goal for this analysis**: Identify negative performance from previous logistics data to explore areas of improvement, and develop actionable strategies.
