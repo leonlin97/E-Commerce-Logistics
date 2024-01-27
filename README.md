@@ -1,4 +1,4 @@
-# E-Commerce-Logistics Data Analysis
+# Logistics Data Analysis
 
 This project uses dataset from **Brazilian E-Commerce Public Dataset by Olist** [(sources: Kaggle / Olist Store)](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce/data?select=olist_orders_dataset.csv). The dataset has information of 100k online e-commerce orders from 2016 to 2018 made at multiple marketplaces in Brazil. 
 
@@ -112,6 +112,11 @@ ORDER BY year ASC, month ASC,oi.order_id ASC;
 
 The **`freight_ratio`** defined as `freight_cost/volumn_weight`, meaning the higher the ratio, the more products we shipped under the same cost.
 
+Freight_ratio performed better during first quarter in 2017, while it was trending down since then until recently. Maintaing the Freight_ratio above `3` can ensure the efficiency, and my suggestion is:
+- Working with logistics team to realize the cost of each transportation type (railway, bus, and air...)
+- Negotiate with carrier to prevent fluncuate freight cost, and possibly getting better deal with long-term business relationship
+- Consolidate more orders into one shipment to optimize shipping efficiency.
+
 ```
 CREATE VIEW freight_ratio AS
 SELECT 
@@ -126,12 +131,10 @@ GROUP BY year,month;
 ```
 <img width="915" alt="image" src="https://github.com/leonlin97/E-Commerce-Logistics/assets/142073522/06c01576-a256-4954-b1d8-f4e17454e9c3">
 
-Freight_ratio performed better during first quarter in 2017, while it was trending down since then until recently. Maintaing the Freight_ratio above `3` can ensure the efficiency, and my suggestion is:
-- Working with logistics team to realize the cost of each transportation type (railway, bus, and air...)
-- Negotiate with carrier to prevent fluncuate freight cost, and possibly getting better deal with long-term business relationship
-- Consolidate more orders into one shipment to optimize shipping efficiency.
-
 ### Comparing each month's freight cost to last month
+
+This report can be further modified to tracking weekly freight cost to monitor the trending, allowing logistics team to adjust strategies if needed.
+
 ```
 SELECT
     year,
@@ -145,9 +148,10 @@ GROUP BY year, month
 ORDER BY year ASC, month ASC;
 ```
 
-This report can be further modified to tracking weekly freight cost to monitor the trending, allowing logistics team to adjust strategies if needed.
-
 ### Create customized Function to categorize freight ratio
+
+This methods helps to create category that can be useful for other analysis, such as using logistis analysis to predict the future freight_ratio performance.
+
 ```
 CREATE OR REPLACE FUNCTION get_freight_info(freight_ratio numeric) RETURNS text AS $$
 BEGIN
@@ -170,9 +174,9 @@ FROM freight_ratio;
 <img width="308" alt="image" src="https://github.com/leonlin97/E-Commerce-Logistics/assets/142073522/f6f45a60-ad20-42e4-b6ee-f8e6786d992e">
 <img width="350" alt="image" src="https://github.com/leonlin97/E-Commerce-Logistics/assets/142073522/07b1635e-d110-40c2-8618-65a30966e4cb">
 
-This methods helps to create category that can be useful for other analysis, such as using logistis analysis to predict the future freight_ratio performance.
-
 ### Ranking the total freight Cost of each product category
+
+This report helps to identify which category are having a higher percentage in total freight cost, enabling team to do additional analysis on specific category.
 ```
 	-- 
 SELECT 
@@ -188,7 +192,7 @@ GROUP BY product_category_name_english
 ORDER BY rank_total_freight_cost ASC;
 ```
 <img width="548" alt="image" src="https://github.com/leonlin97/E-Commerce-Logistics/assets/142073522/d96f87c7-fc5c-4fb6-83f8-aa053452988d">
-This report helps to identify which category are having a higher percentage in total freight cost, enabling team to do additional analysis on specific category.
+
 
 
 
