@@ -49,7 +49,7 @@ SELECT
 	COUNT(CASE WHEN order_delivered_customer_date < order_estimated_delivery_date THEN order_id END) AS delivery_ontime,
 	COUNT(CASE WHEN order_delivered_customer_date>order_estimated_delivery_date THEN order_id END) AS late_delivery
 FROM order_info
-WHERE (order_status != 'unavailable' OR order_status != 'canceled')
+WHERE (order_status != 'unavailable' AND order_status != 'canceled')
 GROUP BY year,month
 ORDER BY year ASC,month ASC;
 ```
@@ -71,7 +71,7 @@ SELECT
 		  	shipping_limit_date > order_delivered_carrier_date AND order_delivered_customer_date > order_estimated_delivery_date 
 		  THEN order_id END) AS late_by_carrier
 FROM order_info
-WHERE (order_status != 'unavailable' OR order_status != 'canceled')
+WHERE (order_status != 'unavailable' AND order_status != 'canceled')
 GROUP BY year,month
 ORDER BY year ASC,month ASC;
 ```
@@ -104,7 +104,7 @@ SELECT
 FROM item AS i
 JOIN order_info AS oi on oi.order_id = i.order_id
 JOIN product AS p on p.product_id = i.product_id
-WHERE (order_status != 'unavailable' OR order_status != 'canceled')
+WHERE (order_status != 'unavailable' AND order_status != 'canceled')
 GROUP BY year,month,oi.order_id
 ORDER BY year ASC, month ASC,oi.order_id ASC;
 ```
