@@ -110,7 +110,7 @@ ORDER BY year ASC, month ASC,oi.order_id ASC;
 ```
 ### Create report to monitor freight cost-efficiency
 
-The **`freight_ratio`** defined as `freight_cost/volumn_weight`, meaning the higher the ratio, the more products we shipped under the same cost.
+The **`freight_ratio`** defined as `volumn_weight/freight_cost`, meaning the higher the ratio, the more products we shipped under the same cost.
 
 Freight_ratio performed better during first quarter in 2017, while it was trending down since then until recently. Maintaing the Freight_ratio above `3` can ensure the efficiency, and my suggestion is:
 - Working with logistics team to realize the cost of each transportation type (railway, bus, and air...)
